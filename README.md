@@ -42,9 +42,8 @@ maintained subset.
   calendar use. Protected tool families use each user's own revocable OAuth
   access; there is no administrator API-key setting and no shared entitlement.
 
-The plugin calls `https://mcp.fxmacrodata.com/mcp` with the standard MCP
-Streamable HTTP transport. It packages no FXMacroData service source, data,
-ingestion logic, credentials, internal logic, or commercially sensitive code.
+The plugin connects to `https://mcp.fxmacrodata.com/mcp` with the standard MCP
+Streamable HTTP transport.
 
 ## Install locally in AstrBot
 
@@ -55,8 +54,7 @@ ingestion logic, credentials, internal logic, or commercially sensitive code.
 3. Before enabling personal protected access, set
    `FXMACRODATA_ASTRBOT_TOKEN_ENCRYPTION_KEY` in the AstrBot host environment
    to an operator-managed Fernet key. This encrypts OAuth tokens in AstrBot's
-   private plugin KV store; it is not an FXMacroData API key and must never be
-   committed, placed in plugin configuration, or shared with users.
+   private plugin KV store. Keep this host setting private.
 4. Reload the plugin, then run `/fxmacrodata status`. The response gives the
    exact number of currently registered hosted MCP capabilities.
 5. Enable the FXMacroData tools in AstrBot's Function Calling tool management
@@ -95,10 +93,8 @@ as needed, and removed locally plus revoked remotely by:
 /fxmacrodata disconnect
 ```
 
-No API key, OAuth token, encryption key, customer data, or internal FXMacroData
-logic is packaged, logged, shown to another chat user, or placed in a tool
-response. A user who has not connected continues to receive only the hosted
-MCP's public no-key baseline.
+A user who has not connected continues to receive only the hosted MCP's public
+no-key baseline.
 
 ## Examples
 
@@ -134,20 +130,16 @@ cadence. The first alert schedules the next confirmed event, then rechecks it
 with the hosted calendar before delivery. Scheduled briefings and release
 alerts are information services, not personalised investment advice.
 
-The private plugin KV record contains the opted-in subscription's opaque
-AstrBot session identifier, a separate personal sender identity used for OAuth
-lookup, selected currency/indicator, cadence, and delivery state. Encrypted
-OAuth tokens are stored separately. It contains no message history, API key,
-pricing/billing data, or FXMacroData internal data. `/fxmacrodata alerts remove
-all` erases every notification record owned by the current chat session.
+Subscriptions are scoped to the current chat session. `/fxmacrodata alerts
+remove all` stops every notification owned by that session.
 
 ## Development validation
 
-Run from the FXMacroData monorepo root:
+Run from the plugin repository root:
 
 ```powershell
-python -m pytest extensions/astrbot-fxmacrodata/tests -n 0
-python -m ruff check extensions/astrbot-fxmacrodata
+python -m pytest tests -n 0
+python -m ruff check .
 ```
 
 The tests use mocked MCP transport for repeatability. A separate local live

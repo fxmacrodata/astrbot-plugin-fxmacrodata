@@ -1,10 +1,8 @@
 """Native AstrBot integration for the hosted FXMacroData MCP service.
 
 Every hosted MCP tool, prompt, and concrete resource is registered as an
-AstrBot FunctionTool. The plugin adds only client-side AstrBot experiences: a
-macro command centre, a bundled research skill, rich Markdown briefings, and opt-in session notifications.
-It intentionally excludes FXMacroData service code, data, credentials, and
-commercially sensitive implementation logic.
+AstrBot FunctionTool. The plugin provides a macro command centre, a bundled
+research skill, rich Markdown briefings, and opt-in session notifications.
 """
 
 from __future__ import annotations

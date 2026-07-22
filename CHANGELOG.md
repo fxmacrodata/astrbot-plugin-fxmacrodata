@@ -10,4 +10,3 @@
   revocable disconnect.
 - Added opt-in release alerts and scheduled briefings using AstrBot's cron
   manager.
-- Added public-artifact safety checks and public-repository validation.

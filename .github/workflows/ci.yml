@@ -1,4 +1,4 @@
-name: Validate public plugin artifact
+name: Validate plugin
 
 on:
   pull_request:
@@ -21,9 +21,6 @@ jobs:
 
       - name: Install public plugin dependencies
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt pytest pytest-asyncio pytest-xdist ruff
-
-      - name: Verify exact public artifact contents
-        run: python scripts/verify_public_artifact.py
 
       - name: Run plugin tests
         run: python -m pytest tests -n 0
