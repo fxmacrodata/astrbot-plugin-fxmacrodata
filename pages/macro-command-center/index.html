@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="page.documentTitle">FXMacroData Macro Command Center</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow" data-i18n="page.eyebrow">FXMacroData × AstrBot</p>
+          <h1 data-i18n="page.title">Macro Command Center</h1>
+          <p class="lede" data-i18n="page.subtitle">
+            The complete hosted FXMacroData MCP catalogue, natively available in AstrBot.
+          </p>
+        </div>
+        <div class="status" id="connection-status" aria-live="polite" data-i18n="page.connecting">Connecting…</div>
+      </header>
+
+      <section class="privacy-note">
+        <strong data-i18n="page.publicData">Public baseline, with personal access when connected.</strong>
+        <span data-i18n="page.publicDataDetail">
+          Connect your own FXMacroData account for protected data. Your API key is entered on FXMacroData, never in AstrBot.
+        </span>
+        <div class="auth-controls">
+          <button id="connect-account" type="button" data-i18n="action.connect">Connect FXMacroData</button>
+          <button id="disconnect-account" type="button" hidden data-i18n="action.disconnect">Disconnect</button>
+          <span id="account-status" aria-live="polite" data-i18n="page.checkingAccess">Checking personal access…</span>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="Macro Command Center sections" data-i18n-aria-label="page.tabListLabel">
+        <button class="tab active" data-panel="calendar" data-i18n="tab.calendar">Release calendar</button>
+        <button class="tab" data-panel="research" data-i18n="tab.research">Research pack</button>
+        <button class="tab" data-panel="indicator" data-i18n="tab.indicator">Indicator data</button>
+        <button class="tab" data-panel="pair" data-i18n="tab.pair">FX pair</button>
+        <button class="tab" data-panel="prompts" data-i18n="tab.prompts">Prompt library</button>
+        <button class="tab" data-panel="resources" data-i18n="tab.resources">Interactive views</button>
+        <button class="tab" data-panel="tools" data-i18n="tab.tools">All MCP capabilities</button>
+      </nav>
+
+      <section class="panel active" id="calendar">
+        <form data-endpoint="calendar" class="query-form">
+          <label><span data-i18n="field.currency">Currency</span><input name="currency" value="USD" maxlength="3" required /></label>
+          <label><span data-i18n="field.indicatorOptional">Indicator (optional)</span><input name="indicator" placeholder="inflation" maxlength="80" /></label>
+          <label><span data-i18n="field.timezoneOptional">IANA timezone (optional)</span><input name="timezone" placeholder="Australia/Sydney" maxlength="80" /></label>
+          <button type="submit" data-i18n="action.calendar">Load release calendar</button>
+        </form>
+        <div class="result" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="research">
+        <form data-endpoint="research" class="query-form">
+          <label><span data-i18n="field.currency">Currency</span><input name="currency" value="USD" maxlength="3" required /></label>
+          <label><span data-i18n="field.indicator">Indicator</span><input name="indicator" value="inflation" maxlength="80" required /></label>
+          <label><span data-i18n="field.baseOptional">Base (optional)</span><input name="base" placeholder="EUR" maxlength="3" /></label>
+          <label><span data-i18n="field.quoteOptional">Quote (optional)</span><input name="quote" placeholder="USD" maxlength="3" /></label>
+          <button type="submit" data-i18n="action.research">Build research pack</button>
+        </form>
+        <div class="result" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="indicator">
+        <form data-endpoint="indicator" class="query-form">
+          <label><span data-i18n="field.currency">Currency</span><input name="currency" value="USD" maxlength="3" required /></label>
+          <label><span data-i18n="field.indicator">Indicator</span><input name="indicator" value="inflation" maxlength="80" required /></label>
+          <label><span data-i18n="field.startOptional">Start date (optional)</span><input name="start_date" type="date" /></label>
+          <label><span data-i18n="field.endOptional">End date (optional)</span><input name="end_date" type="date" /></label>
+          <button type="submit" data-i18n="action.indicator">Load indicator data</button>
+        </form>
+        <div class="result" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="pair">
+        <form data-endpoint="pair" class="query-form two-columns">
+          <label><span data-i18n="field.base">Base</span><input name="base" value="EUR" maxlength="3" required /></label>
+          <label><span data-i18n="field.quote">Quote</span><input name="quote" value="USD" maxlength="3" required /></label>
+          <button type="submit" data-i18n="action.pair">Build FX context</button>
+        </form>
+        <div class="result" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="prompts">
+        <div class="inventory-intro">
+          <div>
+            <h2 data-i18n="prompts.title">Hosted prompt library</h2>
+            <p data-i18n="prompts.description">Resolve each reusable FXMacroData prompt with its live argument contract.</p>
+          </div>
+          <button id="load-prompts" type="button" data-i18n="action.prompts">Refresh prompts</button>
+        </div>
+        <div class="tool-grid" id="prompt-grid" aria-live="polite"></div>
+        <section class="prompt-runner" id="prompt-runner" hidden aria-live="polite"></section>
+      </section>
+
+      <section class="panel" id="resources">
+        <div class="inventory-intro">
+          <div>
+            <h2 data-i18n="resources.title">Hosted interactive views</h2>
+            <p data-i18n="resources.description">Open each MCP App resource in an isolated, sandboxed view.</p>
+          </div>
+          <button id="load-resources" type="button" data-i18n="action.resources">Refresh views</button>
+        </div>
+        <div class="tool-grid" id="resource-grid" aria-live="polite"></div>
+        <section class="resource-viewer" id="resource-viewer" hidden aria-live="polite"></section>
+      </section>
+
+      <section class="panel" id="tools">
+        <div class="inventory-intro">
+          <div>
+            <h2 data-i18n="tools.title">Every hosted MCP capability</h2>
+            <p data-i18n="tools.description">Tools, prompts, and resources are dynamically registered for AstrBot function calling.</p>
+          </div>
+          <button id="load-tools" type="button" data-i18n="action.tools">Refresh capability inventory</button>
+        </div>
+        <div class="capability-summary" id="capability-summary" aria-live="polite"></div>
+        <div class="tool-grid" id="tool-grid" aria-live="polite"></div>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

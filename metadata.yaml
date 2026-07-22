@@ -1,0 +1,7 @@
+name: astrbot_plugin_fxmacrodata
+display_name: FXMacroData
+short_desc: Complete FXMacroData MCP tools, prompts, and resources with personal OAuth, research, dashboard, and alerts.
+desc: Native AstrBot plugin that discovers every currently published FXMacroData MCP tool, prompt, and resource and adds personal FXMacroData OAuth, a Macro Command Center, research Skill, and opt-in session briefings.
+version: v1.3.0
+author: FXMacroData
+astrbot_version: ">=4.13.0,<5"

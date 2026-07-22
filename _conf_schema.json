@@ -1,0 +1,8 @@
+{
+  "request_timeout_seconds": {
+    "type": "int",
+    "description": "Timeout for each hosted MCP request in seconds.",
+    "hint": "Use a value from 5 to 120 seconds. The default is suitable for ordinary data requests.",
+    "default": 45
+  }
+}
