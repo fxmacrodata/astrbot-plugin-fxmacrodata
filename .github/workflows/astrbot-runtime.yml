@@ -26,7 +26,7 @@ jobs:
           path: .astrbot-runtime
 
       - name: Install AstrBot and plugin test dependencies
-        run: python -m pip install --upgrade pip && python -m pip install -e .astrbot-runtime -r requirements.txt pytest pytest-xdist
+        run: python -m pip install --upgrade pip && python -m pip install -e .astrbot-runtime -r requirements.txt pytest pytest-asyncio pytest-xdist
 
       - name: Import and register the plugin in AstrBot
         run: python -m pytest tests/test_astrbot_runtime.py -n 0 -rs
