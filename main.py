@@ -18,7 +18,20 @@ from typing import Any, Awaitable, Callable
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent, MessageChain, filter
 from astrbot.api.star import Context, Star, register
-from astrbot.api.web import error_response, json_response, request
+try:
+    from astrbot.api.web import error_response, json_response, request
+except ModuleNotFoundError:  # AstrBot <= 4.25 exposes Quart directly.
+    from quart import jsonify, request
+
+    def json_response(data: Any = None, *, status_code: int = 200):
+        response = jsonify(data if data is not None else {})
+        response.status_code = status_code
+        return response
+
+    def error_response(message: str, *, status_code: int = 400):
+        response = jsonify({"error": message})
+        response.status_code = status_code
+        return response
 from astrbot.core.agent.run_context import ContextWrapper
 from astrbot.core.agent.tool import FunctionTool
 from astrbot.core.astr_agent_context import AstrAgentContext
