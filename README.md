@@ -1,5 +1,9 @@
 # FXMacroData for AstrBot
 
+Bring official macroeconomic history, release calendars and market context into AstrBot chats, research briefings and release alerts.
+
+[Subscribe to FXMacroData](https://fxmacrodata.com/subscribe?utm_source=github&utm_medium=referral&utm_campaign=open_source_integrations&utm_content=astrbot_subscribe) for non-USD data, full available history, FX, commodities and positioning. Evaluate the plugin with public USD data, then use **Connect FXMacroData** or `/fxmacrodata connect` to connect your own subscription.
+
 This is a native AstrBot marketplace-plugin package. It discovers the hosted
 FXMacroData MCP server at startup and registers every currently published MCP
 tool, reusable prompt, and concrete resource as an AstrBot `FunctionTool`.
@@ -38,9 +42,10 @@ maintained subset.
   daily briefings, and week-ahead briefings. Scheduling uses AstrBot's built-in
   cron manager and its private plugin KV store—not a background polling loop.
   Users can list or remove only their own chat-session subscriptions.
-- A useful no-key baseline for public USD discovery, macro history, and release
-  calendar use. Protected tool families use each user's own revocable OAuth
-  access; there is no administrator API-key setting and no shared entitlement.
+- Public USD discovery, recent macro history and release calendars for
+  evaluating the plugin. Protected tool families use each subscriber's own
+  revocable OAuth access; there is no administrator API-key setting and no
+  shared entitlement.
 
 The plugin connects to `https://mcp.fxmacrodata.com/mcp` with the standard MCP
 Streamable HTTP transport.
