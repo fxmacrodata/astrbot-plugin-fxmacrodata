@@ -14,7 +14,6 @@ from alerts import (
     validate_weekday,
 )
 
-
 CALENDAR = """## USD Release Calendar
 
 | Time | Release | Source | Confirmed |

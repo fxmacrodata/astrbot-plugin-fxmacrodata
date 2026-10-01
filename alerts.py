@@ -7,7 +7,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-
 _CALENDAR_ROW = re.compile(
     r"^\|\s*(?P<when>\d{4}-\d{2}-\d{2}T[^|]+?)\s*\|\s*"
     r"(?P<release>[^|]+?)\s*\|.*?\|\s*(?P<confirmed>Yes|No)\s*\|$",

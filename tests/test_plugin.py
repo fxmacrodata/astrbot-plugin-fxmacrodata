@@ -35,7 +35,6 @@ def plugin_module(monkeypatch):
 
         async def put_kv_data(self, key, value):
             self._kv[key] = value
-            return None
 
     class MessageChain:
         def __init__(self):
@@ -415,9 +414,11 @@ async def test_status_command_recovers_from_initial_discovery_failure(
     ]
 
     assert responses == [
-        "FXMacroData is connected. 1 hosted MCP tools are registered for AstrBot "
-        "function calling. Public data is available. Run `/fxmacrodata connect` for "
-        "your protected FXMacroData access."
+        (
+            "FXMacroData is connected. 1 hosted MCP tools are registered for AstrBot "
+            "function calling. Public data is available. Run `/fxmacrodata connect` for "
+            "your protected FXMacroData access."
+        )
     ]
 
 

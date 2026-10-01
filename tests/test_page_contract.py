@@ -4,7 +4,6 @@ import json
 import re
 from pathlib import Path
 
-
 PLUGIN_ROOT = Path(__file__).resolve().parents[1]
 PAGE_ROOT = PLUGIN_ROOT / "pages" / "macro-command-center"
 I18N_ROOT = PLUGIN_ROOT / ".astrbot-plugin" / "i18n"

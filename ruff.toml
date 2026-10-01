@@ -1,0 +1,9 @@
+[lint.per-file-ignores]
+# AstrBot installs the plugin from its repository directory, so the package
+# name has to match the published repo name (astrbot-plugin-fxmacrodata).
+"__init__.py" = ["N999"]
+# main.py is the boundary between AstrBot and the hosted MCP service. Command
+# handlers, cron callbacks and dashboard routes catch every exception on
+# purpose: network, MCP and scheduler failures are logged and turned into a
+# user-facing message so a failing request never crashes the host bot.
+"main.py" = ["BLE001"]
